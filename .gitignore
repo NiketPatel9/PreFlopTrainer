@@ -1,5 +1,5 @@
 # Compilted source #
 ####################
 *.class
-.idea/*
+.idea
 out
