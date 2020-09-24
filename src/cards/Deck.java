@@ -1,22 +1,20 @@
 package cards;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Deck {
 
-    private List<Card> cards;
+    private Stack<Card> cards;
 
     public Deck() {
         List<String> values = new ArrayList<String>(Arrays.asList("A", "2", "3", "4", "5", "6", "7", "8", "9",
                 "10", "J", "Q", "K"));
 
-        this.cards = new ArrayList<Card>();
+        this.cards = new Stack<Card>();
 
         for (Suit suit : Suit.values()) {
             for (String value : values) {
-                cards.add(new Card(suit, value));
+                cards.push(new Card(suit, value));
             }
         }
     }
@@ -30,5 +28,13 @@ public class Deck {
 
         // System.out.println(deck);
         return deck;
+    }
+
+    public void shuffle() {
+        Collections.shuffle(this.cards);
+    }
+
+    public Card topCard() {
+        return cards.pop();
     }
 }
