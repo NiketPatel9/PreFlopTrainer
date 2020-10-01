@@ -4,46 +4,53 @@ import cards.Deck;
 import player.Player;
 import player.Pos;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Point;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class Trainer extends JPanel {
 
-    private Point lastPoint;
+	private static final int CARD_X = 20;
+	private static final int CARD_Y = 20;
+	private static final int CARD_WIDTH = 25;
+	private static final int CARD_HEIGHT = 75;
 
-    public Trainer() {
-        addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-                lastPoint = new Point(e.getX(), e.getY());
-            }
-        });
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
 
-        addMouseMotionListener(new MouseMotionAdapter() {
-            public void mouseDragged(MouseEvent e) {
-                Graphics g = getGraphics();
-                g.drawLine(lastPoint.x, lastPoint.y, e.getX(), e.getY());
-                g.dispose();
-            }
-        });
-    }
+		g.drawRect(CARD_X, CARD_Y, CARD_WIDTH, CARD_HEIGHT);
+	}
+
+
+	@Override
+	public Dimension getPreferredSize() {
+		return new Dimension(1700, 1000);
+	}
+
+	private static void createAndShowGui() {
+		Trainer mainPanel = new Trainer();
+		JFrame frame = new JFrame("Preflop Trainer");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().add(mainPanel);
+		frame.pack();
+		frame.setLocationByPlatform(true);
+		frame.setVisible(true);
+
+	}
 
     public static void main(String args[]) {
 
-        JFrame frame = new JFrame("Preflop Trainer");
-        frame.getContentPane().add(new Trainer(), BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400,300);
-        frame.setVisible(true);
-
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				createAndShowGui();
+			}
+		});
+		
         Deck deck = new Deck();
         deck.shuffle();
 
@@ -61,6 +68,9 @@ public class Trainer extends JPanel {
         for (Player p : players) {
             System.out.println(p.getName() + " " + p.getHand() + " " + p.getPosition());
         }
+
+
 //        System.out.println(deck.showCards());
     }
+
 }
