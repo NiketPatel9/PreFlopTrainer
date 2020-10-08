@@ -50,7 +50,7 @@ public class Trainer extends JPanel {
 				createAndShowGui();
 			}
 		});
-		
+
         Deck deck = new Deck();
         deck.shuffle();
 
