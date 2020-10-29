@@ -27,8 +27,6 @@ public class Trainer extends JPanel {
 		Font f2 = new Font("Card Suits", Font.PLAIN, 36);
 
 		for (Player p : players) {
-			System.out.println(p.getName() + " " + p.getHand() + " " + p.getPosition() + p.getRelevantCoordinates());
-
 			g.setFont(f);
 			g.drawRect(p.getRelevantCoordinates().get("CardOneTopLeft").x,
 					p.getRelevantCoordinates().get("CardOneTopLeft").y,
@@ -36,19 +34,19 @@ public class Trainer extends JPanel {
 			g.drawRect(p.getRelevantCoordinates().get("CardTwoTopLeft").x,
 					p.getRelevantCoordinates().get("CardTwoTopLeft").y,
 					80, 120);
-			g.drawString("A", p.getRelevantCoordinates().get("CardOneValue").x,
+			g.drawString(p.getHand().get(0).getValue(), p.getRelevantCoordinates().get("CardOneValue").x,
 					p.getRelevantCoordinates().get("CardOneValue").y);
-			g.drawString("A", p.getRelevantCoordinates().get("CardTwoValue").x,
+			g.drawString(p.getHand().get(1).getValue(), p.getRelevantCoordinates().get("CardTwoValue").x,
 					p.getRelevantCoordinates().get("CardTwoValue").y);
 
 			g.setFont(f2);
-			g.drawString("♠", p.getRelevantCoordinates().get("CardOneTopSuit").x,
+			g.drawString(p.getHand().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneTopSuit").x,
 					p.getRelevantCoordinates().get("CardOneTopSuit").y);
-			g.drawString("♠", p.getRelevantCoordinates().get("CardOneBottomSuit").x,
+			g.drawString(p.getHand().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneBottomSuit").x,
 					p.getRelevantCoordinates().get("CardOneBottomSuit").y);
-			g.drawString("♠", p.getRelevantCoordinates().get("CardTwoTopSuit").x,
+			g.drawString(p.getHand().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoTopSuit").x,
 					p.getRelevantCoordinates().get("CardTwoTopSuit").y);
-			g.drawString("♠", p.getRelevantCoordinates().get("CardTwoBottomSuit").x,
+			g.drawString(p.getHand().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoBottomSuit").x,
 					p.getRelevantCoordinates().get("CardTwoBottomSuit").y);
 		}
 	}
@@ -88,7 +86,7 @@ public class Trainer extends JPanel {
 	    SwingUtilities.invokeLater(new Runnable() {
 		    @Override
 		    public void run() {
-			    createAndShowGui();
+		    	createAndShowGui();
 		    }
 	    });
 
