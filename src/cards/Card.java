@@ -1,5 +1,7 @@
 package cards;
 
+import java.awt.*;
+
 public class Card {
 
     private Suit suit;
@@ -16,6 +18,21 @@ public class Card {
 
     public String getValue() {
         return this.value;
+    }
+
+    public Color getColor() {
+    	if (this.suit == Suit.HEART) {
+    		return Color.RED;
+	    }
+    	else if (this.suit == Suit.DIAMOND) {
+    		return Color.BLUE;
+	    }
+    	else if (this.suit == Suit.CLUB) {
+    		return Color.GREEN;
+	    }
+    	else {
+    		return Color.BLACK;
+	    }
     }
 
     public String toString() {

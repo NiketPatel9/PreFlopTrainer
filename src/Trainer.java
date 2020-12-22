@@ -23,27 +23,41 @@ public class Trainer extends JPanel {
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		Font f = new Font("Card Values", Font.PLAIN, 48);
-		Font f2 = new Font("Card Suits", Font.PLAIN, 36);
 
 		for (Player p : players) {
-			g.setFont(f);
+			Font rect_font = new Font("Card Shapes", Font.PLAIN, 48);
+			g.setFont(rect_font);
+			g.setColor(Color.BLACK);
 			g.drawRect(p.getRelevantCoordinates().get("CardOneTopLeft").x,
 					p.getRelevantCoordinates().get("CardOneTopLeft").y,
 					80, 120);
 			g.drawRect(p.getRelevantCoordinates().get("CardTwoTopLeft").x,
 					p.getRelevantCoordinates().get("CardTwoTopLeft").y,
 					80, 120);
+
+
+			Font card_one_value_font = new Font("Card Value", Font.PLAIN, 48);
+			g.setFont(card_one_value_font);
+
+			g.setColor(p.getHand().get(0).getColor());
 			g.drawString(p.getHand().get(0).getValue(), p.getRelevantCoordinates().get("CardOneValue").x,
 					p.getRelevantCoordinates().get("CardOneValue").y);
+
+			g.setColor(p.getHand().get(1).getColor());
 			g.drawString(p.getHand().get(1).getValue(), p.getRelevantCoordinates().get("CardTwoValue").x,
 					p.getRelevantCoordinates().get("CardTwoValue").y);
 
-			g.setFont(f2);
+
+			Font card_one_suit_font = new Font("Card Suit", Font.PLAIN, 36);
+			g.setFont(card_one_suit_font);
+
+			g.setColor(p.getHand().get(0).getColor());
 			g.drawString(p.getHand().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneTopSuit").x,
 					p.getRelevantCoordinates().get("CardOneTopSuit").y);
 			g.drawString(p.getHand().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneBottomSuit").x,
 					p.getRelevantCoordinates().get("CardOneBottomSuit").y);
+
+			g.setColor(p.getHand().get(1).getColor());
 			g.drawString(p.getHand().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoTopSuit").x,
 					p.getRelevantCoordinates().get("CardTwoTopSuit").y);
 			g.drawString(p.getHand().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoBottomSuit").x,
