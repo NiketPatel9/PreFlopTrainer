@@ -3,10 +3,12 @@ import cards.Suit;
 import cards.Deck;
 import player.Player;
 import player.Pos;
+import util.HandComparator;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.*;
 
@@ -95,6 +97,14 @@ public class Trainer extends JPanel {
             holeCards.add(deck.topCard());
             Player player = new Player("Player " + (i + 1), holeCards, Pos.values()[i]);
             players.add(player);
+        }
+
+        List<Set<Card>> combos = deck.cardCombos();
+
+        HandComparator comparator = new HandComparator();
+        for (Set<Card> combo : combos) {
+			comparator.determineWinner(players, combo);
+			break;
         }
 
 	    SwingUtilities.invokeLater(new Runnable() {

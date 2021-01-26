@@ -1,5 +1,6 @@
 package cards;
 
+import util.CombinationCalc;
 import java.util.*;
 
 public class Deck {
@@ -36,5 +37,14 @@ public class Deck {
 
     public Card topCard() {
         return cards.pop();
+    }
+
+    public List<Set<Card>> cardCombos() {
+
+	    CombinationCalc<Card> calc = new CombinationCalc<>();
+
+	    List<Card> cardList = new ArrayList<Card>(this.cards);
+
+	    return calc.getSubsets(cardList, 5);
     }
 }

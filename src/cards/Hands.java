@@ -1,0 +1,5 @@
+package cards;
+
+public enum Hands {
+	ROYAL, STRAIGHTFLUSH, QUADS, BOAT, FLUSH, STRAIGHT, SET, TWOPAIR, PAIR, HIGHCARD;
+}

@@ -10,11 +10,13 @@ public class Player {
 	private String name;
 	private List<Card> hand;
 	private Pos position;
+	private int boardsWon;
 
 	public Player(String name, ArrayList<Card> holeCards, Pos position) {
 		this.name = name;
 		this.hand = holeCards;
 		this.position = position;
+		this.boardsWon = 0;
 	}
 
 	public String getName() { return this.name; }
@@ -69,6 +71,10 @@ public class Player {
 			nameToCoordinate.put(relevantCoords.get(i), new Point(adjustedX, adjustedY));
 		}
 		return nameToCoordinate;
+	}
+
+	public void boardWon() {
+		this.boardsWon++;
 	}
 
 }
