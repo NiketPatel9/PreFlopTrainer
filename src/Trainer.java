@@ -1,5 +1,4 @@
 import cards.Card;
-import cards.Suit;
 import cards.Deck;
 import player.Player;
 import player.Pos;
@@ -41,28 +40,28 @@ public class Trainer extends JPanel {
 			Font card_one_value_font = new Font("Card Value", Font.PLAIN, 48);
 			g.setFont(card_one_value_font);
 
-			g.setColor(p.getHand().get(0).getColor());
-			g.drawString(p.getHand().get(0).getValue(), p.getRelevantCoordinates().get("CardOneValue").x,
+			g.setColor(p.getHoleCards().get(0).getColor());
+			g.drawString(p.getHoleCards().get(0).getValue(), p.getRelevantCoordinates().get("CardOneValue").x,
 					p.getRelevantCoordinates().get("CardOneValue").y);
 
-			g.setColor(p.getHand().get(1).getColor());
-			g.drawString(p.getHand().get(1).getValue(), p.getRelevantCoordinates().get("CardTwoValue").x,
+			g.setColor(p.getHoleCards().get(1).getColor());
+			g.drawString(p.getHoleCards().get(1).getValue(), p.getRelevantCoordinates().get("CardTwoValue").x,
 					p.getRelevantCoordinates().get("CardTwoValue").y);
 
 
 			Font card_one_suit_font = new Font("Card Suit", Font.PLAIN, 36);
 			g.setFont(card_one_suit_font);
 
-			g.setColor(p.getHand().get(0).getColor());
-			g.drawString(p.getHand().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneTopSuit").x,
+			g.setColor(p.getHoleCards().get(0).getColor());
+			g.drawString(p.getHoleCards().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneTopSuit").x,
 					p.getRelevantCoordinates().get("CardOneTopSuit").y);
-			g.drawString(p.getHand().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneBottomSuit").x,
+			g.drawString(p.getHoleCards().get(0).printSuit(), p.getRelevantCoordinates().get("CardOneBottomSuit").x,
 					p.getRelevantCoordinates().get("CardOneBottomSuit").y);
 
-			g.setColor(p.getHand().get(1).getColor());
-			g.drawString(p.getHand().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoTopSuit").x,
+			g.setColor(p.getHoleCards().get(1).getColor());
+			g.drawString(p.getHoleCards().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoTopSuit").x,
 					p.getRelevantCoordinates().get("CardTwoTopSuit").y);
-			g.drawString(p.getHand().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoBottomSuit").x,
+			g.drawString(p.getHoleCards().get(1).printSuit(), p.getRelevantCoordinates().get("CardTwoBottomSuit").x,
 					p.getRelevantCoordinates().get("CardTwoBottomSuit").y);
 		}
 	}
@@ -106,6 +105,10 @@ public class Trainer extends JPanel {
 			comparator.determineWinner(players, combo);
 			break;
         }
+
+//        for (Player p : players) {
+//        	System.out.println(p.getHand());
+//        }
 
 	    SwingUtilities.invokeLater(new Runnable() {
 		    @Override

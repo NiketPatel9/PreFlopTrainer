@@ -1,6 +1,7 @@
 package player;
 
 import cards.Card;
+import cards.Hand;
 
 import java.util.*;
 import java.awt.Point;
@@ -8,20 +9,28 @@ import java.awt.Point;
 public class Player {
 
 	private String name;
-	private List<Card> hand;
+	private List<Card> holeCards;
 	private Pos position;
 	private int boardsWon;
+	private Hand hand;
+	private List<Card> combo;
+
 
 	public Player(String name, ArrayList<Card> holeCards, Pos position) {
 		this.name = name;
-		this.hand = holeCards;
+		this.holeCards = holeCards;
 		this.position = position;
 		this.boardsWon = 0;
+		this.hand = Hand.HIGHCARD;
+		this.combo = new ArrayList<Card>();
 	}
 
 	public String getName() { return this.name; }
-	public List<Card> getHand() { return this.hand; }
+	public List<Card> getHoleCards() { return this.holeCards; }
 	public Pos getPosition() { return this.position; }
+	public int getBoardsWon() { return this.boardsWon; }
+	public Hand getHand() { return  this.hand; }
+	public List<Card> getCombo() { return this.combo; }
 
 	public Map<String, Point> getRelevantCoordinates() {
 		ArrayList<String> relevantCoords = new ArrayList<String>(Arrays.asList("CardOneTopLeft", "CardTwoTopLeft",
@@ -77,4 +86,7 @@ public class Player {
 		this.boardsWon++;
 	}
 
+	public void setHand(Hand h) {
+		this.hand = h;
+	}
 }

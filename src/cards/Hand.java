@@ -1,5 +1,5 @@
 package cards;
 
-public enum Hands {
+public enum Hand {
 	ROYAL, STRAIGHTFLUSH, QUADS, BOAT, FLUSH, STRAIGHT, SET, TWOPAIR, PAIR, HIGHCARD;
 }
