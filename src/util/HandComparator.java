@@ -2,6 +2,7 @@ package util;
 
 import cards.Card;
 import cards.Hand;
+import cards.Suit;
 import player.Player;
 import util.CombinationCalc;
 
@@ -27,19 +28,44 @@ public class HandComparator {
 		allCards.addAll(fiveCards);
 
 		List<Set<Card>> fiveCardCombos = calc.getSubsets(allCards, 5);
-		System.out.println(fiveCardCombos.size());
-		if (this.checkRoyalFlush(allCards)) {
-			return  Hand.ROYAL;
+
+		Set<Card> bestHand;
+		Hand hand;
+
+		for (Set<Card> combo : fiveCardCombos) {
+			if (this.checkRoyalFlush(combo)) {
+				bestHand = combo;
+				hand = Hand.ROYAL;
+				break;
+			}
+			else {
+				bestHand = combo;
+				hand = Hand.HIGHCARD;
+			}
+
 		}
-		return Hand.HIGHCARD;
+		return null;
 	}
 
-	private boolean checkRoyalFlush(List<Card> cards) {
-		//if (this.checkStraightFlush() && cards.contains(new Card()))
+	private boolean checkRoyalFlush(Set<Card> cards) {
+
+		List<String> values = new ArrayList<>();
+		List<Suit> suits = new ArrayList<>();
+
+		for (Card card : cards) {
+			values.add(card.getValue());
+			suits.add(card.getSuit());
+		}
+
+		System.out.println(values);
+		System.out.println(suits);
+		return this.checkStraightFlush(values, suits) && values.contains("A") && values.contains("10");
+
+	}
+
+	private boolean checkStraightFlush(List<String> values, List<Suit> suits) {
 		return true;
-		// check if royal flush next time
 	}
-
 
 
 }

@@ -1,6 +1,7 @@
 package cards;
 
 import java.awt.*;
+import java.util.Objects;
 
 public class Card {
 
@@ -54,4 +55,22 @@ public class Card {
 		    return "♣";
 	    }
     }
+
+	@Override
+	public boolean equals(Object o) {
+		// self check
+		if (this == o)
+			return true;
+		// null check
+		if (o == null)
+			return false;
+		// type check and cast
+		if (getClass() != o.getClass())
+			return false;
+		Card card = (Card) o;
+		// field comparison
+		return Objects.equals(this.suit, card.getSuit())
+				&& Objects.equals(this.value, card.getValue());
+	}
+
 }
