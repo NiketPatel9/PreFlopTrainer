@@ -57,13 +57,19 @@ public class HandComparator {
 			suits.add(card.getSuit());
 		}
 
-		System.out.println(values);
-		System.out.println(suits);
 		return this.checkStraightFlush(values, suits) && values.contains("A") && values.contains("10");
 
 	}
 
 	private boolean checkStraightFlush(List<String> values, List<Suit> suits) {
+		return checkStraight(values, suits) && checkFlush(values, suits);
+	}
+
+	private boolean checkStraight(List<String> values, List<Suit> suits) {
+		return true;
+	}
+
+	private boolean checkFlush(List<String> values, List<Suit> suits) {
 		return true;
 	}
 
