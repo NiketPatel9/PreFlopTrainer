@@ -33,10 +33,18 @@ public class HandComparator {
 		Hand hand;
 
 		for (Set<Card> combo : fiveCardCombos) {
-			if (this.checkRoyalFlush(combo)) {
+
+			List<Suit> suits = new ArrayList<>();
+			List<String> values = new ArrayList<>();
+
+			for (Card card : combo) {
+				values.add(card.getValue());
+				suits.add(card.getSuit());
+			}
+
+			if (this.checkRoyalFlush(suits, values)) {
 				bestHand = combo;
 				hand = Hand.ROYAL;
-				break;
 			}
 			else {
 				bestHand = combo;
@@ -47,29 +55,21 @@ public class HandComparator {
 		return null;
 	}
 
-	private boolean checkRoyalFlush(Set<Card> cards) {
+	private boolean checkRoyalFlush(List<Suit> suits, List<String> values) {
 
-		List<String> values = new ArrayList<>();
-		List<Suit> suits = new ArrayList<>();
-
-		for (Card card : cards) {
-			values.add(card.getValue());
-			suits.add(card.getSuit());
-		}
-
-		return this.checkStraightFlush(values, suits) && values.contains("A") && values.contains("10");
+		return this.checkStraightFlush(suits, values) && values.contains("A") && values.contains("10");
 
 	}
 
-	private boolean checkStraightFlush(List<String> values, List<Suit> suits) {
-		return checkStraight(values, suits) && checkFlush(values, suits);
+	private boolean checkStraightFlush(List<Suit> suits, List<String> values) {
+		return checkStraight(suits, values) && checkFlush(suits, values);
 	}
 
-	private boolean checkStraight(List<String> values, List<Suit> suits) {
+	private boolean checkStraight(List<Suit> suits, List<String> values) {
 		return true;
 	}
 
-	private boolean checkFlush(List<String> values, List<Suit> suits) {
+	private boolean checkFlush(List<Suit> suits, List<String> values) {
 		return true;
 	}
 
