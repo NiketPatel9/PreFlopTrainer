@@ -6,6 +6,7 @@ import cards.Suit;
 import player.Player;
 import util.CombinationCalc;
 
+
 import java.util.*;
 
 public class HandComparator {
@@ -30,10 +31,10 @@ public class HandComparator {
 		Set<Card> bestHand;
 		Hand hand;
 
-		Card c1 = new Card(Suit.HEART, "10");
-		Card c2 = new Card(Suit.HEART, "K");
-		Card c3 = new Card(Suit.HEART, "Q");
-		Card c4 = new Card(Suit.HEART, "J");
+		Card c1 = new Card(Suit.HEART, "J");
+		Card c2 = new Card(Suit.SPADE, "J");
+		Card c3 = new Card(Suit.CLUB, "10");
+		Card c4 = new Card(Suit.DIAMOND, "J");
 		Card c5 = new Card(Suit.HEART, "9");
 
 		Set<Card> testHand = new HashSet<Card>();
@@ -67,7 +68,11 @@ public class HandComparator {
 			else if (this.checkStraightFlush(suits, values)) {
 				bestHand = combo;
 				hand = Hand.STRAIGHTFLUSH;
-				System.out.println("Do i get here?");
+			}
+			else if (this.checkFourOfAKind(suits, values)) {
+				bestHand = combo;
+				hand = Hand.QUADS;
+				System.out.println("This is a quads hand.");
 			}
 			else if (this.checkFullHouse(suits, values)) {
 				bestHand = combo;
@@ -92,17 +97,40 @@ public class HandComparator {
 		return checkStraight(suits, values) && checkFlush(suits, values);
 	}
 
-	private boolean checkStraight(List<Suit> suits, List<String> values) {
-		return true;
-	}
+	private boolean checkFourOfAKind(List<Suit> suits, List<String> values) {
 
-	private boolean checkFlush(List<Suit> suits, List<String> values) {
-		return true;
+		Set<String> uniqueValues = new HashSet<String>(values);
+
+		System.out.println(uniqueValues);
+
+		final Counter<String> counts = new Counter<>();
+
+		for (String value : values) {
+			counts.add(value);
+		}
+
+		for (String value : uniqueValues) {
+			if (counts.count(value) == 4) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private boolean checkFullHouse(List<Suit> suits, List<String> values) {
 		return true;
 	}
+
+
+	private boolean checkStraight(List<Suit> suits, List<String> values) {
+		return true;
+	}
+
+	private boolean checkFlush(List<Suit> suits, List<String> values) {
+		return false;
+	}
+
 
 
 }
