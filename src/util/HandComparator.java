@@ -31,11 +31,11 @@ public class HandComparator {
 		Set<Card> bestHand;
 		Hand hand;
 
-		Card c1 = new Card(Suit.HEART, "J");
-		Card c2 = new Card(Suit.SPADE, "J");
-		Card c3 = new Card(Suit.CLUB, "10");
-		Card c4 = new Card(Suit.DIAMOND, "J");
-		Card c5 = new Card(Suit.HEART, "9");
+		Card c1 = new Card(Suit.HEART, "A");
+		Card c2 = new Card(Suit.HEART, "5");
+		Card c3 = new Card(Suit.HEART, "2");
+		Card c4 = new Card(Suit.HEART, "J");
+		Card c5 = new Card(Suit.HEART, "10");
 
 		Set<Card> testHand = new HashSet<Card>();
 		testHand.add(c1);
@@ -72,11 +72,11 @@ public class HandComparator {
 			else if (this.checkFourOfAKind(suits, values)) {
 				bestHand = combo;
 				hand = Hand.QUADS;
-				System.out.println("This is a quads hand.");
 			}
 			else if (this.checkFullHouse(suits, values)) {
 				bestHand = combo;
 				hand = Hand.BOAT;
+				System.out.println("This is a boat");
 			}
 			else {
 				bestHand = combo;
@@ -101,8 +101,6 @@ public class HandComparator {
 
 		Set<String> uniqueValues = new HashSet<String>(values);
 
-		System.out.println(uniqueValues);
-
 		final Counter<String> counts = new Counter<>();
 
 		for (String value : values) {
@@ -119,7 +117,10 @@ public class HandComparator {
 	}
 
 	private boolean checkFullHouse(List<Suit> suits, List<String> values) {
-		return true;
+
+		Set<String> uniqueValues = new HashSet<String>(values);
+
+		return uniqueValues.size() == 2;
 	}
 
 
