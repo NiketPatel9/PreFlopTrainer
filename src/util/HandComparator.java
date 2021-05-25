@@ -31,11 +31,11 @@ public class HandComparator {
 		Set<Card> bestHand;
 		Hand hand;
 
-		Card c1 = new Card(Suit.HEART, "A");
-		Card c2 = new Card(Suit.HEART, "5");
-		Card c3 = new Card(Suit.HEART, "2");
-		Card c4 = new Card(Suit.HEART, "J");
-		Card c5 = new Card(Suit.HEART, "10");
+		Card c1 = new Card(Suit.CLUB, "A");
+		Card c2 = new Card(Suit.HEART, "2");
+		Card c3 = new Card(Suit.HEART, "3");
+		Card c4 = new Card(Suit.DIAMOND, "4");
+		Card c5 = new Card(Suit.SPADE, "5");
 
 		Set<Card> testHand = new HashSet<Card>();
 		testHand.add(c1);
@@ -58,25 +58,30 @@ public class HandComparator {
 				suits.add(card.getSuit());
 			}
 
-			System.out.println(suits);
-			System.out.println(values);
-
 			if (this.checkRoyalFlush(suits, values)) {
 				bestHand = combo;
 				hand = Hand.ROYAL;
+				System.out.println("This is a royal flush.");
 			}
 			else if (this.checkStraightFlush(suits, values)) {
 				bestHand = combo;
 				hand = Hand.STRAIGHTFLUSH;
+				System.out.println("This is a straight flush.");
 			}
 			else if (this.checkFourOfAKind(suits, values)) {
 				bestHand = combo;
 				hand = Hand.QUADS;
+				System.out.println("This is a four of a kind.");
 			}
 			else if (this.checkFullHouse(suits, values)) {
 				bestHand = combo;
 				hand = Hand.BOAT;
-				System.out.println("This is a boat");
+				System.out.println("This is a full house.");
+			}
+			else if (this.checkFlush(suits, values)) {
+				bestHand = combo;
+				hand = Hand.FLUSH;
+				System.out.println("This is a flush.");
 			}
 			else {
 				bestHand = combo;
@@ -123,14 +128,15 @@ public class HandComparator {
 		return uniqueValues.size() == 2;
 	}
 
+	private boolean checkFlush(List<Suit> suits, List<String> values) {
+		Set<Suit> uniqueSuits = new HashSet<Suit>(suits);
+		return uniqueSuits.size() == 1;
+	}
 
 	private boolean checkStraight(List<Suit> suits, List<String> values) {
-		return true;
-	}
-
-	private boolean checkFlush(List<Suit> suits, List<String> values) {
 		return false;
 	}
+
 
 
 
