@@ -5,7 +5,7 @@ import cards.Hand;
 import cards.Suit;
 import player.Player;
 import util.CombinationCalc;
-
+import java.util.Collections;
 
 import java.util.*;
 
@@ -31,11 +31,11 @@ public class HandComparator {
 		Set<Card> bestHand;
 		Hand hand;
 
-		Card c1 = new Card(Suit.CLUB, "A");
-		Card c2 = new Card(Suit.HEART, "2");
-		Card c3 = new Card(Suit.HEART, "3");
-		Card c4 = new Card(Suit.DIAMOND, "4");
-		Card c5 = new Card(Suit.SPADE, "5");
+		Card c1 = new Card(Suit.HEART, "A");
+		Card c2 = new Card(Suit.HEART, "K");
+		Card c3 = new Card(Suit.HEART, "Q");
+		Card c4 = new Card(Suit.DIAMOND, "J");
+		Card c5 = new Card(Suit.HEART, "10");
 
 		Set<Card> testHand = new HashSet<Card>();
 		testHand.add(c1);
@@ -82,6 +82,11 @@ public class HandComparator {
 				bestHand = combo;
 				hand = Hand.FLUSH;
 				System.out.println("This is a flush.");
+			}
+			else if (this.checkStraight(suits, values)) {
+				bestHand = combo;
+				hand = Hand.STRAIGHT;
+				System.out.println("This is a straight.");
 			}
 			else {
 				bestHand = combo;
@@ -134,6 +139,28 @@ public class HandComparator {
 	}
 
 	private boolean checkStraight(List<Suit> suits, List<String> values) {
+
+		Collections.sort(values);
+
+		List<List<String>> allStraights = Arrays.asList(Arrays.asList("A", "2", "3", "4", "5"),
+				Arrays.asList("2", "3", "4", "5", "6"),
+				Arrays.asList("3", "4", "5", "6", "7"),
+				Arrays.asList("4", "5", "6", "7", "8"),
+				Arrays.asList("5", "6", "7", "8", "9"),
+				Arrays.asList("6", "7", "8", "9", "10"),
+				Arrays.asList("7", "8", "9", "10", "J"),
+				Arrays.asList("8", "9", "10", "J", "Q"),
+				Arrays.asList("9", "10", "J", "Q", "K"),
+				Arrays.asList("10", "J", "Q", "K", "A"));
+
+
+		for (List<String> unsortedStraight : allStraights) {
+			Collections.sort(unsortedStraight);
+			if (values.equals(unsortedStraight)) {
+				return true;
+			}
+		}
+
 		return false;
 	}
 
