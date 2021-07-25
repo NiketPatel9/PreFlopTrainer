@@ -32,10 +32,10 @@ public class HandComparator {
 		Hand hand;
 
 		Card c1 = new Card(Suit.HEART, "A");
-		Card c2 = new Card(Suit.HEART, "K");
+		Card c2 = new Card(Suit.DIAMOND, "Q");
 		Card c3 = new Card(Suit.HEART, "Q");
-		Card c4 = new Card(Suit.DIAMOND, "J");
-		Card c5 = new Card(Suit.HEART, "10");
+		Card c4 = new Card(Suit.DIAMOND, "A");
+		Card c5 = new Card(Suit.HEART, "3");
 
 		Set<Card> testHand = new HashSet<Card>();
 		testHand.add(c1);
@@ -87,6 +87,11 @@ public class HandComparator {
 				bestHand = combo;
 				hand = Hand.STRAIGHT;
 				System.out.println("This is a straight.");
+			}
+			else if (this.checkSet(suits, values)) {
+				bestHand = combo;
+				hand = Hand.SET;
+				System.out.println("This is a three of a kind.");
 			}
 			else {
 				bestHand = combo;
@@ -157,6 +162,24 @@ public class HandComparator {
 		for (List<String> unsortedStraight : allStraights) {
 			Collections.sort(unsortedStraight);
 			if (values.equals(unsortedStraight)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private boolean checkSet(List<Suit> suits, List<String> values) {
+		Set<String> uniqueValues = new HashSet<>(values);
+
+		final Counter<String> counts = new Counter<>();
+
+		for (String value : values) {
+			counts.add(value);
+		}
+
+		for (String value : uniqueValues) {
+			if (counts.count(value) == 3) {
 				return true;
 			}
 		}
