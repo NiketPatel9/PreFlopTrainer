@@ -31,7 +31,7 @@ public class HandComparator {
 		Set<Card> bestHand;
 		Hand hand;
 
-		Card c1 = new Card(Suit.HEART, "A");
+		Card c1 = new Card(Suit.HEART, "K");
 		Card c2 = new Card(Suit.DIAMOND, "Q");
 		Card c3 = new Card(Suit.HEART, "Q");
 		Card c4 = new Card(Suit.DIAMOND, "A");
@@ -92,6 +92,11 @@ public class HandComparator {
 				bestHand = combo;
 				hand = Hand.SET;
 				System.out.println("This is a three of a kind.");
+			}
+			else if (this.checkTwoPair(suits, values)) {
+				bestHand = combo;
+				hand = Hand.TWOPAIR;
+				System.out.println("This is a two pair.");
 			}
 			else {
 				bestHand = combo;
@@ -185,6 +190,27 @@ public class HandComparator {
 		}
 
 		return false;
+	}
+
+	private boolean checkTwoPair(List<Suit> suits, List<String> values) {
+		Set<String> uniqueValues = new HashSet<>(values);
+
+		final Counter<String> counts = new Counter<>();
+
+		for (String value : values) {
+			counts.add(value);
+		}
+
+		List<Integer> rawCounts = new ArrayList<>();
+
+		for (String value : uniqueValues) {
+			rawCounts.add(counts.count(value));
+		}
+
+		Collections.sort(rawCounts);
+
+
+		return rawCounts.equals(new ArrayList<>(Arrays.asList(1, 2, 2)));
 	}
 
 
