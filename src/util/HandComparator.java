@@ -33,7 +33,7 @@ public class HandComparator {
 
 		Card c1 = new Card(Suit.HEART, "K");
 		Card c2 = new Card(Suit.DIAMOND, "Q");
-		Card c3 = new Card(Suit.HEART, "Q");
+		Card c3 = new Card(Suit.HEART, "J");
 		Card c4 = new Card(Suit.DIAMOND, "A");
 		Card c5 = new Card(Suit.HEART, "3");
 
@@ -98,11 +98,16 @@ public class HandComparator {
 				hand = Hand.TWOPAIR;
 				System.out.println("This is a two pair.");
 			}
+			else if (this.checkPair(suits, values)) {
+				bestHand = combo;
+				hand = Hand.TWOPAIR;
+				System.out.println("This is a pair.");
+			}
 			else {
 				bestHand = combo;
 				hand = Hand.HIGHCARD;
+				System.out.println("This is a high card.");
 			}
-
 		}
 		return null;
 	}
@@ -213,7 +218,24 @@ public class HandComparator {
 		return rawCounts.equals(new ArrayList<>(Arrays.asList(1, 2, 2)));
 	}
 
+	private boolean checkPair(List<Suit> suits, List<String> values) {
+		Set<String> uniqueValues = new HashSet<>(values);
 
+		final Counter<String> counts = new Counter<>();
 
+		for (String value : values) {
+			counts.add(value);
+		}
+
+		List<Integer> rawCounts = new ArrayList<>();
+
+		for (String value : uniqueValues) {
+			rawCounts.add(counts.count(value));
+		}
+
+		Collections.sort(rawCounts);
+
+		return rawCounts.equals(new ArrayList<>(Arrays.asList(1, 1, 1, 2)));
+	}
 
 }
